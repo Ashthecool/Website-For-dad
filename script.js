@@ -16,9 +16,19 @@
       // auto: use simple checks: userAgent or touch + width
       return (typeof navigator !== 'undefined' && (/Mobi|Android|iPhone|iPad|iPod|Windows Phone/i).test(navigator.userAgent)) || ('ontouchstart' in window && innerWidth < 800);
     }
+    // convert millimeters to CSS pixels (approx. using 96dpi)
+    function mmToPx(mm){ return Math.round(mm * 96 / 25.4); }
+    // target physical device dimensions (mm)
+    const PHONE_DIM = { widthMm: 77.6, heightMm: 162.8, depthMm: 8.2 };
     function getGameWidth(){
       const margin = isMobileDevice() ? 24 : 120; // tighter margin on phones
-      return Math.max(300, Math.min(900, innerWidth - margin));
+      const viewportAvailable = innerWidth - margin;
+      // if in strict phone mode, prefer approximate physical width in px
+      if(getStoredDeviceMode() === 'phone'){
+        const phonePx = mmToPx(PHONE_DIM.widthMm);
+        return Math.max(280, Math.min(phonePx, viewportAvailable));
+      }
+      return Math.max(300, Math.min(900, viewportAvailable));
     }
     function applyResponsiveSizes(){
       // bgCanvas
