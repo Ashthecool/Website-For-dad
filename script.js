@@ -20,23 +20,42 @@
     function mmToPx(mm){ return Math.round(mm * 96 / 25.4); }
     // target physical device dimensions (mm)
     const PHONE_DIM = { widthMm: 77.6, heightMm: 162.8, depthMm: 8.2 };
+    function getContainerInnerWidth(){
+      const container = document.querySelector('.container');
+      if(!container) return Math.max(320, innerWidth - 48);
+        const cont = document.querySelector('.container') || document.body;
+        const style = getComputedStyle(cont);
+        const paddingL = parseFloat(style.paddingLeft) || 0;
+        const paddingR = parseFloat(style.paddingRight) || 0;
+        const w = cont.clientWidth - paddingL - paddingR;
+        // ensure we never return ridiculous values
+        return Math.max(160, Math.min(w, window.innerWidth));
+    }
+
     function getGameWidth(){
-      const margin = isMobileDevice() ? 24 : 120; // tighter margin on phones
-      const viewportAvailable = innerWidth - margin;
-      // if in strict phone mode, prefer approximate physical width in px
-      if(getStoredDeviceMode() === 'phone'){
+      const containerAvailable = getContainerInnerWidth();
+      const mode = getStoredDeviceMode();
+      const containerW = getContainerInnerWidth();
+      if(mode === 'phone'){
         const phonePx = mmToPx(PHONE_DIM.widthMm);
-        return Math.max(280, Math.min(phonePx, viewportAvailable));
+        // prefer phone physical width but never exceed container
+        return Math.max(140, Math.min(phonePx, containerW));
       }
-      return Math.max(300, Math.min(900, viewportAvailable));
+      if(mode === 'desktop') return Math.max(480, Math.min(800, containerW));
+      // auto: choose smaller of container and a reasonable percentage
+      return Math.max(320, Math.min(640, containerW));
     }
     function applyResponsiveSizes(){
       // bgCanvas
-      const bg = document.getElementById('bgCanvas'); if(bg){ bg.width = innerWidth; bg.height = innerHeight; }
-      // hero canvas
-      const hc = document.getElementById('heroCanvas'); if(hc){ hc.width = isMobileDevice() ? Math.min(360, innerWidth - 40) : 320; hc.height = 200; }
+      const bg = document.getElementById('bgCanvas'); if(bg){ bg.width = innerWidth; bg.height = innerHeight; bg.style.width = '100%'; bg.style.height = '100%'; }
+      // container-constrained widths
+      const containerW = getContainerInnerWidth();
+      // hero canvas: keep it comfortably smaller than container
+      const hc = document.getElementById('heroCanvas'); if(hc){ const desired = isMobileDevice() ? Math.min(320, containerW) : Math.min(320, containerW); hc.width = desired; hc.height = 200; hc.style.maxWidth = '100%'; }
       // visualizer
-      const vis = document.getElementById('visualizer'); if(vis){ vis.width = isMobileDevice() ? Math.min(280, innerWidth - 60) : 300; vis.height = 60; }
+      const vis = document.getElementById('visualizer'); if(vis){ const desiredVis = Math.min(300, containerW); vis.width = Math.max(200, desiredVis); vis.height = 60; vis.style.maxWidth = '100%'; }
+      // game canvas: sized in initGame via getGameWidth but ensure max is container
+      const game = document.getElementById('gameCanvas'); if(game){ const gw = Math.min(getGameWidth(), containerW); game.width = gw; game.style.maxWidth = '100%'; }
       // game canvas sizing handled in initGame via getGameWidth()
     }
   const ageEl = document.getElementById('age');
