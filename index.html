@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday — Dad</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="scanlines"></div>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <header class="nav">
+    <h1 class="neon">Merry Christmas — Dad</h1>
+    <nav>
+      <button id="vhsToggle">VHS: Off</button>
+      <button id="confettiBtn">Launch Confetti</button>
+      <button id="themeBtn">Toggle Theme</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-left">
+        <h2 id="heroTitle">A Christmas Gift for the coolest 90s dad</h2>
+        <p class="lead">Born <span id="birthdate">28/04/1977</span> — Age: <span id="age"></span></p>
+        <div id="countdown" aria-live="polite" class="countdown">Countdown: <span id="countdownValue">—</span></div>
+        <p class="editable" contenteditable="true" id="personalLine">Write a short message here to personalize the hero section.</p>
+        <div class="controls">
+          <label class="file-label">Play 90s track <input id="audioFile" type="file" accept="audio/*"></label>
+          <audio id="player" controls></audio>
+          <canvas id="visualizer" width="300" height="60" aria-hidden="true"></canvas>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="cassette">
+          <img src="assets/cassette.svg" alt="cassette"/>
+        </div>
+        <canvas id="heroCanvas" width="320" height="200" aria-hidden="true"></canvas>
+      </div>
+    </section>
+
+    <section id="suggested" class="card">
+      <h3>Suggested Songs</h3>
+      <p>Here are some 90s & classic songs you could use — click "Copy playlist" to copy titles to clipboard.</p>
+      <ul id="suggestedList">
+        <li>Oasis — Wonderwall</li>
+        <li>Blur — Song 2</li>
+        <li>Nirvana — Come As You Are</li>
+        <li>Beck — Loser</li>
+        <li>UB40 — Red Red Wine</li>
+        <li>Eric Clapton — Wonderful Tonight</li>
+        <li>Eagles — Hotel California</li>
+        <li>Phil Collins — In the Air Tonight</li>
+        <li>Queen — Don't Stop Me Now</li>
+        <li>Green Day — Good Riddance (Time of Your Life)</li>
+      </ul>
+      <button id="copyPlaylist">Copy playlist</button>
+    </section>
+
+    <section id="about" class="card">
+      <h3>About</h3>
+      <textarea id="aboutText" placeholder="Add details about your dad — childhood memories, career, hobbies..."></textarea>
+      <button id="saveAbout">Save About</button>
+    </section>
+
+    <section id="timeline" class="card">
+      <h3>Timeline</h3>
+      <ol id="timelineList">
+        <li contenteditable>1977 — Born.</li>
+        <li contenteditable>1990s — Memorable 90s moment...</li>
+      </ol>
+      <button id="addTimeline">Add event</button>
+    </section>
+
+    <section id="gallery" class="card">
+      <h3>Gallery</h3>
+      <div class="gallery-grid" id="galleryGrid">
+        <div class="photo" data-src="assets/photo1.svg"><img src="assets/photo1.svg" alt="photo"></div>
+        <div class="photo" data-src="assets/photo2.svg"><img src="assets/photo2.svg" alt="photo"></div>
+      </div>
+      <input id="addPhoto" type="file" accept="image/*">
+    </section>
+
+    <section id="library" class="card">
+      <h3>Photo Library</h3>
+      <p>Add photos here and tag them as <strong>Family</strong>, <strong>Friends</strong>, or <strong>Events</strong>. Use filters to view groups.</p>
+      <div class="library-controls">
+        <select id="libCategory">
+          <option value="family">Family</option>
+          <option value="friends">Friends</option>
+          <option value="events">Events</option>
+          <option value="other">Other</option>
+        </select>
+        <input id="libUpload" type="file" accept="image/*" multiple>
+        <button id="libClear">Clear Library</button>
+      </div>
+      <div class="library-filters">
+        <button class="libFilter" data-filter="all">All</button>
+        <button class="libFilter" data-filter="family">Family</button>
+        <button class="libFilter" data-filter="friends">Friends</button>
+        <button class="libFilter" data-filter="events">Events</button>
+        <button class="libFilter" data-filter="other">Other</button>
+      </div>
+      <div id="libraryGrid" class="gallery-grid"></div>
+    </section>
+
+    <section id="favorites" class="card">
+      <h3>Favorites</h3>
+      <ul id="favList">
+        <li contenteditable>Favorite band</li>
+        <li contenteditable>Favourite movie</li>
+      </ul>
+    </section>
+
+    <section id="guestbook" class="card">
+      <h3>Guestbook</h3>
+      <form id="guestForm">
+        <input id="name" placeholder="Your name" required>
+        <textarea id="message" placeholder="Leave a message for Dad" required></textarea>
+        <button type="submit">Leave Message</button>
+      </form>
+      <div class="recorder">
+        <button id="recBtn" aria-pressed="false">Start Recording</button>
+        <div id="recordingsList" class="recordings" aria-live="polite"></div>
+      </div>
+      <div id="messages"></div>
+      <div class="guesttools">
+        <button id="exportMessages">Export messages</button>
+        <button id="clearMessages">Clear messages</button>
+      </div>
+    </section>
+
+    <section id="memory" class="card">
+      <h3>Memory Cards</h3>
+      <div class="memory-controls">
+        <input id="newCardTitle" placeholder="Title">
+        <textarea id="newCardText" placeholder="Write a memory..."></textarea>
+        <button id="addCard">Add Memory Card</button>
+      </div>
+      <div id="memoryCards" class="memory-cards" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <div id="cursor" class="cursor"></div>
+
+  <section id="minigame" class="card" aria-label="Mini game: Bounce to spell Jimmy">
+    <h3>Mini Game — Bounce to spell "Jimmy"</h3>
+    <p>Click the canvas to add a bouncing ball. Bounce balls into the pads to reveal letters.</p>
+    <canvas id="gameCanvas" width="900" height="220"></canvas>
+    <div class="game-controls">
+      <div class="game-stats">Score: <span id="gameScore">0</span> — Lives: <span id="gameLives">3</span></div>
+      <button id="gameReset">Reset Game</button>
+      <button id="gameAdd">Add Ball</button>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

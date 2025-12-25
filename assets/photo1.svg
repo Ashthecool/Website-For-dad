@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#2b0036"/>
+  <rect x="40" y="40" width="720" height="420" rx="12" fill="#ffb6e6"/>
+  <text x="400" y="260" font-size="36" font-family="Rubik, Arial" fill="#120018" text-anchor="middle">Family Photo Placeholder</text>
+</svg>

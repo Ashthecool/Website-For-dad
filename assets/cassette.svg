@@ -1,0 +1,8 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="332" y="90" rx="24" fill="#111" stroke="#222" stroke-width="8"/>
+  <rect x="56" y="156" width="400" height="120" rx="12" fill="#ffd1f5"/>
+  <circle cx="160" cy="216" r="36" fill="#1b1b1b"/>
+  <circle cx="352" cy="216" r="36" fill="#1b1b1b"/>
+  <rect x="96" y="206" width="320" height="20" rx="4" fill="#e6a7ff"/>
+  <text x="256" y="268" font-size="20" font-family="Rubik, Arial" fill="#0b0b0b" text-anchor="middle">90s MIX</text>
+</svg>
