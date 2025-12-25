@@ -82,3 +82,27 @@ textarea, input[type=text], input, #name, #message{width:100%;padding:10px;borde
 /* small touches */
 button{cursor:pointer}
 .editable{border-left:3px solid rgba(255,77,210,0.12);padding:8px;border-radius:6px}
+
+/* Make the hero personal line visually pop without changing content */
+#personalLine{
+  font-size:1.12rem;
+  line-height:1.5;
+  padding:14px 16px;
+  border-radius:10px;
+  background: linear-gradient(90deg, rgba(255,77,210,0.06), rgba(0,240,255,0.04));
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45), inset 0 0 18px rgba(255,77,210,0.02);
+  color:var(--fg);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.35);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  transform-origin:left center;
+  font-weight:600;
+  max-width:100%;
+}
+#personalLine:hover, #personalLine:focus{
+  transform: scale(1.02);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.55), 0 0 28px rgba(255,77,210,0.12);
+  outline: none;
+}
+@keyframes popPulse { 0% { box-shadow: 0 6px 24px rgba(0,0,0,0.45), inset 0 0 6px rgba(255,77,210,0.02);} 50% { box-shadow: 0 10px 36px rgba(0,0,0,0.5), inset 0 0 22px rgba(255,77,210,0.06);} 100% { box-shadow: 0 6px 24px rgba(0,0,0,0.45), inset 0 0 6px rgba(255,77,210,0.02);} }
+#personalLine{ animation: popPulse 3.8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { #personalLine{ animation:none; transition:none } }

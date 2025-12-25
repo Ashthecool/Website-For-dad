@@ -11,11 +11,10 @@
   <div id="scanlines"></div>
   <canvas id="bgCanvas" aria-hidden="true"></canvas>
   <header class="nav">
-    <h1 class="neon">Merry Christmas — Dad</h1>
+    <h1 class="neon">Superdad — My Hero</h1>
     <nav>
       <button id="vhsToggle">VHS: Off</button>
       <button id="confettiBtn">Launch Confetti</button>
-      <button id="themeBtn">Toggle Theme</button>
       <label for="deviceSwitch" class="device-switch-label">Mode:
         <select id="deviceSwitch" aria-label="Device mode">
           <option value="phone">Phone</option>
@@ -29,12 +28,12 @@
   <main class="container">
     <section class="hero">
       <div class="hero-left">
-        <h2 id="heroTitle">A Christmas Gift for the coolest 90s dad</h2>
-        <p class="lead">Born <span id="birthdate">28/04/1977</span> — Age: <span id="age"></span></p>
+        <h2 id="heroTitle">For my Superdad — Trainer, Gamer, & Hero</h2>
+        <p class="lead">Born <span id="birthdate">28/04/1977</span> — Age: <span id="age"></span> — My idol and superhero.</p>
         <div id="countdown" aria-live="polite" class="countdown">Countdown: <span id="countdownValue">—</span></div>
-        <p class="editable" contenteditable="true" id="personalLine">Write a short message here to personalize the hero section.</p>
+        <p class="editable" contenteditable="true" id="personalLine">Far du er så sej, du ved det, men du skal høre det alligevel, jeg elsker dig for evigt og altid. Det siger vi jo dagligt, men hvorfor elsker jeg dig for evight og altid? Der er 3 grunde. Den første er at du altid er der for mig, lige meget hvad filan dating situation jeg har kommet ud i, er du der for mig. Anden grund er fordi du er sjov og du kan også være rolig og ikke super skrap altid, der er en balance, og det elsker jeg. Tredje grund er at du er sku fandme sjov, og det siger noget, lige meget hvad for noget, kan du altid få mig til at smile. Så for endnu en gang, men ikke sidste gang, Far, jeg elsker dig for evigt og altid.</p>
         <div class="controls">
-          <label class="file-label">Play 90s track <input id="audioFile" type="file" accept="audio/*"></label>
+          <label class="file-label">Play training / game track <input id="audioFile" type="file" accept="audio/*"></label>
           <audio id="player" controls></audio>
           <canvas id="visualizer" width="300" height="60" aria-hidden="true"></canvas>
         </div>
@@ -48,19 +47,19 @@
     </section>
 
     <section id="suggested" class="card">
-      <h3>Suggested Songs</h3>
-      <p>Here are some 90s & classic songs you could use — click "Copy playlist" to copy titles to clipboard.</p>
+      <h3>Training & Game Tracks</h3>
+      <p>Tracks to get pumped for a run, a workout, or to evoke classic game vibes — click "Copy playlist" to copy titles to clipboard.</p>
       <ul id="suggestedList">
-        <li>Oasis — Wonderwall</li>
-        <li>Blur — Song 2</li>
-        <li>Nirvana — Come As You Are</li>
-        <li>Beck — Loser</li>
-        <li>UB40 — Red Red Wine</li>
-        <li>Eric Clapton — Wonderful Tonight</li>
-        <li>Eagles — Hotel California</li>
-        <li>Phil Collins — In the Air Tonight</li>
+        <li>Survivor — Eye of the Tiger</li>
+        <li>Vangelis — Chariots of Fire</li>
+        <li>Rocky Theme — Gonna Fly Now</li>
+        <li>Mega Man 2 — Dr. Wily (NES soundtrack)</li>
+        <li>Castlevania — Vampire Killer</li>
+        <li>Streets of Rage — Go Straight</li>
+        <li>Street Fighter II — Ryu's Theme</li>
         <li>Queen — Don't Stop Me Now</li>
-        <li>Green Day — Good Riddance (Time of Your Life)</li>
+        <li>John Williams — Theme (heroic training)</li>
+        <li>8-bit workout mix — Classic chiptune medley</li>
       </ul>
       <button id="copyPlaylist">Copy playlist</button>
     </section>
@@ -75,7 +74,7 @@
       <h3>Timeline</h3>
       <ol id="timelineList">
         <li contenteditable>1977 — Born.</li>
-        <li contenteditable>1990s — Memorable 90s moment...</li>
+        <li contenteditable>Memorable moments...</li>
       </ol>
       <button id="addTimeline">Add event</button>
     </section>
@@ -152,8 +151,8 @@
   <div id="cursor" class="cursor"></div>
 
   <section id="minigame" class="card" aria-label="Mini game: Bounce to spell Jimmy">
-    <h3>Mini Game — Bounce to spell "Jimmy"</h3>
-    <p>Click the canvas to add a bouncing ball. Bounce balls into the pads to reveal letters.</p>
+  <h3>Mini Game — A classic-style training challenge</h3>
+  <p>Inspired by older video games — click or tap the canvas to add a bouncing ball. Bounce balls into the pads to reveal letters and train your timing.</p>
     <canvas id="gameCanvas" width="900" height="220"></canvas>
     <div class="game-controls">
       <div class="game-stats">Score: <span id="gameScore">0</span> — Lives: <span id="gameLives">3</span></div>
