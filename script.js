@@ -2,8 +2,18 @@
   const BIRTH = '1977-04-28';
     const CHRISTMAS = { month: 3, day: 28 }; // April 28th
     // Device detection & responsive helpers
+    function getStoredDeviceMode(){
+      // stored values: 'phone', 'desktop', 'auto'
+      try{ return localStorage.getItem('device_mode') || 'phone'; }catch(e){ return 'phone'; }
+    }
+    function setStoredDeviceMode(mode){
+      try{ localStorage.setItem('device_mode', mode); }catch(e){}
+    }
     function isMobileDevice(){
-      // simple checks: touch capability plus small width
+      const mode = getStoredDeviceMode();
+      if(mode === 'phone') return true;
+      if(mode === 'desktop') return false;
+      // auto: use simple checks: userAgent or touch + width
       return (typeof navigator !== 'undefined' && (/Mobi|Android|iPhone|iPad|iPod|Windows Phone/i).test(navigator.userAgent)) || ('ontouchstart' in window && innerWidth < 800);
     }
     function getGameWidth(){
@@ -79,6 +89,22 @@
     // responsive adjustments on resize/orientation change
     window.addEventListener('resize', ()=>{ try{ applyResponsiveSizes(); }catch(e){} });
     window.addEventListener('orientationchange', ()=>{ try{ applyResponsiveSizes(); }catch(e){} });
+
+    // device mode selector wiring (Phone / Auto / Desktop)
+    try{
+      const deviceSelect = document.getElementById('deviceSwitch');
+      if(deviceSelect){
+        // set initial value from storage
+        const m = getStoredDeviceMode(); deviceSelect.value = m;
+        deviceSelect.addEventListener('change', (e)=>{
+          const v = e.target.value || 'phone';
+          setStoredDeviceMode(v);
+          // re-apply sizes and fire a resize so in-game resize handlers run
+          try{ applyResponsiveSizes(); }catch(err){}
+          try{ window.dispatchEvent(new Event('resize')); }catch(err){}
+        });
+      }
+    }catch(e){}
 
     updateCountdown();
     setInterval(updateCountdown, 1000);

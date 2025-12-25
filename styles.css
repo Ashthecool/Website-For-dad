@@ -18,6 +18,8 @@ body{
 .nav{display:flex;justify-content:space-between;align-items:center;padding:18px 24px}
 .neon{font-family:'Press Start 2P',monospace;color:var(--accent);text-shadow:0 0 12px rgba(255,77,210,0.25),0 0 28px rgba(0,240,255,0.12)}
 .nav nav button{margin-left:8px;background:transparent;border:1px solid rgba(255,255,255,0.08);padding:8px 12px;color:#fff;border-radius:8px}
+.device-switch-label{margin-left:10px;font-size:13px}
+.device-switch-label select{margin-left:6px;padding:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--fg)}
 .hero{display:flex;gap:20px;align-items:center}
 .hero-left{flex:1}
 .lead{opacity:0.9}
