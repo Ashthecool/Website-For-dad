@@ -33,13 +33,12 @@
     }
 
     function getGameWidth(){
-      const containerAvailable = getContainerInnerWidth();
-      const mode = getStoredDeviceMode();
       const containerW = getContainerInnerWidth();
+      const mode = getStoredDeviceMode();
       if(mode === 'phone'){
-        const phonePx = mmToPx(PHONE_DIM.widthMm);
-        // prefer phone physical width but never exceed container
-        return Math.max(140, Math.min(phonePx, containerW));
+        const presetW = 360; // use user-provided 360px phone width
+        // prefer provided phone width but never exceed container
+        return Math.max(140, Math.min(presetW, containerW));
       }
       if(mode === 'desktop') return Math.max(480, Math.min(800, containerW));
       // auto: choose smaller of container and a reasonable percentage
@@ -55,7 +54,17 @@
       // visualizer
       const vis = document.getElementById('visualizer'); if(vis){ const desiredVis = Math.min(300, containerW); vis.width = Math.max(200, desiredVis); vis.height = 60; vis.style.maxWidth = '100%'; }
       // game canvas: sized in initGame via getGameWidth but ensure max is container
-      const game = document.getElementById('gameCanvas'); if(game){ const gw = Math.min(getGameWidth(), containerW); game.width = gw; game.style.maxWidth = '100%'; }
+      const game = document.getElementById('gameCanvas'); if(game){ const gw = Math.min(getGameWidth(), containerW); game.width = gw; game.style.maxWidth = '100%';
+        // set canvas height: if phone mode, follow 360x800 preset aspect; otherwise use proportional height
+        const mode = getStoredDeviceMode();
+        if(mode === 'phone'){
+          const presetW = 360, presetH = 800;
+          const h = Math.min(presetH, Math.max(200, Math.floor(gw * (presetH / presetW))));
+          game.height = h;
+        } else {
+          game.height = Math.max(240, Math.floor(gw * 0.6));
+        }
+      }
       // game canvas sizing handled in initGame via getGameWidth()
     }
   const ageEl = document.getElementById('age');
